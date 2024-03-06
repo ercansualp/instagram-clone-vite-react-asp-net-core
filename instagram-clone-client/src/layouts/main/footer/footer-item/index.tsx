@@ -1,12 +1,7 @@
 import {NavLink} from "react-router-dom";
-import {ReactNode} from "react";
 
 type props = {
-    item: {
-        url: string,
-        activeIcon: ReactNode,
-        passiveIcon: ReactNode
-    }
+    item: any
 }
 
 export default function FooterItem(props: props) {

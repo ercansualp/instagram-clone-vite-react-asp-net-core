@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-type initialState = {
+type DimensionsState = {
     sidebarWidth: number
 }
 
-const initialState: initialState = {
+const initialState: DimensionsState = {
     sidebarWidth: 336
 }
 
