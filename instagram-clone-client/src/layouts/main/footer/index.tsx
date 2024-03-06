@@ -1,4 +1,4 @@
-import {HomeIcon, MessengerIcon, ReelsIcon, SearchIcon} from "~/assets/icons.tsx";
+import {ExploreIcon, HomeIcon, MessengerIcon, NewPostIcon, ReelsIcon} from "~/assets/icons.tsx";
 import FooterItem from "~/layouts/main/footer/footer-item";
 import HeadlessUIDialog from "~/components/headlessUIDialog";
 import NewPost from "~/components/new-post";
@@ -14,14 +14,15 @@ const footerItems = [
     },
     {
         url: "explore",
-        activeIcon: <SearchIcon width={24} height={24} active={true} />,
-        passiveIcon: <SearchIcon width={24} height={24} active={false} />
+        activeIcon: <ExploreIcon width={24} height={24} active={true} />,
+        passiveIcon: <ExploreIcon width={24} height={24} active={false} />
     },
     {
         url: "reels",
         activeIcon: <ReelsIcon width={24} height={24} active={true} />,
         passiveIcon: <ReelsIcon width={24} height={24} active={false} />
     },
+    <NewPostIcon width={24} height={24} active={true} />,
     {
         url: "direct/inbox",
         activeIcon: <MessengerIcon width={24} height={24} active={true} />,

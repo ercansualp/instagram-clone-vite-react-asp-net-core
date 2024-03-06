@@ -2,9 +2,9 @@ import {ReactNode, useEffect} from "react";
 import Sidebar from "~/layouts/main/sidebar";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 import {setSidebarWidth} from "~/store/dimensions/actions.tsx";
-import Header from "~/layouts/main/header";
 import Footer from "~/layouts/main/footer";
 import classNames from "classnames";
+import {useSidebarSection} from "~/store/sidebar/hooks.tsx";
 
 type props = {
     children: ReactNode
@@ -13,9 +13,10 @@ type props = {
 export default function Main(props: props) {
     const { children } = props;
     const { width } = UseWindowDimensions();
+    const sidebarSection = useSidebarSection();
 
     useEffect(() => {
-        if(width)
+        if(width && !sidebarSection)
         {
             if(width >= 1920)
             {
@@ -40,11 +41,18 @@ export default function Main(props: props) {
         }
     }, [width])
 
+    useEffect(() => {
+        if(sidebarSection)
+        {
+            setSidebarWidth(73);
+            document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
+        }
+    }, [sidebarSection]);
+
     return (
         <div className={classNames("flex min-h-screen bg-black text-[#f5f5f5]", {
             "flex-col": width && width < 768
         })}>
-            { width && width < 768 ? <Header /> : "" }
             { width && width >= 768 ? <Sidebar /> : "" }
             <div className="grow ml-[var(--sidebar-width)]">
                 {children}
