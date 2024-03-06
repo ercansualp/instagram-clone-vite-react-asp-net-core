@@ -29,3 +29,67 @@ export default function HeadlessUIDialog(props: props) {
         </>
     )
 }
+
+
+/*
+New
+
+import {ReactNode, useState} from "react";
+import {Dialog} from "@headlessui/react";
+import classNames from "classnames";
+import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";
+
+type props = {
+    icon: ReactNode,
+    children: ReactNode,
+    title: string|null,
+    onClick: () => void|null
+}
+
+export default function HeadlessUIDialog(props: props) {
+    const { icon, children, title = null, onClick = null } = props;
+    const [isOpen, setIsOpen] = useState(false);
+    const sidebarWidth = useSidebarWidth();
+
+    const handleClick = () => {
+        if(onClick)
+            onClick();
+        setIsOpen(true);
+    }
+
+    return (
+        <>
+            {
+                title === null && sidebarWidth <= 73 ? (
+                    <button onClick={() => setIsOpen(true)} className="w-12 h-12 p-3">
+                        {icon}
+                    </button>
+                ) : (
+                    <button onClick={handleClick} className="w-full flex items-center h-12 p-3 gap-x-4">
+                        {icon}
+                        {
+                            sidebarWidth > 73 ? (
+                                <span className="leading-5 text-base mt-0.5 font-normal">{title}</span>
+                            ) : ""
+                        }
+                    </button>
+                )
+            }
+            <Dialog
+                open={isOpen}
+                onClose={() => setIsOpen(false)}
+                className="relative z-50"
+            >
+                <div className="fixed inset-0 flex items-center justify-center bg-[#000000a6]">
+                    <Dialog.Panel className="rounded-xl bg-[#262626]">
+                        {children}
+                    </Dialog.Panel>
+                </div>
+            </Dialog>
+        </>
+    )
+}
+
+
+
+ */
