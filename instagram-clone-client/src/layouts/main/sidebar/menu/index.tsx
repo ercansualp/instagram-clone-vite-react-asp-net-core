@@ -16,6 +16,8 @@ import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 import {useState} from "react";
 import NewPost from "~/components/new-post";
 import HeadlessUIDialog from "~/components/headlessUIDialog";
+import UserAvatar from "~/assets/img/user.jpg";
+import MenuFooter from "~/layouts/main/sidebar/menu/menu-footer";
 
 const menuItems = [
     {
@@ -40,7 +42,7 @@ const menuItems = [
 
 export default function Menu() {
     const sidebarWidth = useSidebarWidth();
-    const { width } = UseWindowDimensions();
+    const { width, height } = UseWindowDimensions();
     const [sidebarItems, setSidebarItems] = useState([
         {
             title: "Ana Sayfa",
@@ -58,7 +60,7 @@ export default function Menu() {
             value: true
         },
         {
-            title: "Kefşet",
+            title: "Keşfet",
             active: false,
             url: "explore",
             activeIcon: <ExploreIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />,
@@ -274,8 +276,14 @@ export default function Menu() {
             {
                 sidebarItems.map((item, index) =>
                     item.url ? (
-                        <Link key={index} to={item.url} className="h-14" onClick={() => handleClick(item, index)}>
-                            <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
+                        <Link key={index} to={item.url} className={classNames({
+                            "h-14": height && height >= 600,
+                            "h-13": height && height < 600
+                        })} onClick={() => handleClick(item, index)}>
+                            <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                                "my-1": height && height >= 600,
+                                "my-0.5": height && height < 600
+                            })}>
                                 <div className="flex gap-x-4 items-center">
                                     <>
                                         { item.active ? item.activeIcon : item.passiveIcon }
@@ -292,10 +300,15 @@ export default function Menu() {
                             </div>
                         </Link>
                     ) : (
-                        <div key={index} className="h-14 cursor-pointer" onClick={() => handleClick(item, index)}>
-                            <div className={classNames("h-12 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                        <div key={index} className={classNames("cursor-pointer", {
+                            "h-14": height && height >= 600,
+                            "h-13": height && height < 600
+                        })} onClick={() => handleClick(item, index)}>
+                            <div className={classNames("h-12 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
                                 "border border-[#dbdbdb] p-[11px]": item.active,
-                                "p-3": !item.active
+                                "p-3": !item.active,
+                                "my-1": height && height >= 600,
+                                "my-0.5": height && height < 600
                             })}>
                                 <div className="flex gap-x-4 items-center">
                                     { item.active ? item.activeIcon : item.passiveIcon }
@@ -314,16 +327,39 @@ export default function Menu() {
                 )
             }
 
-            {
-                /*
-
-                <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur" onClick={() => handleClick({value:false}, index)}>
+            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur" onClick={() => handleClick({value:false}, index)}>
                 <NewPost />
             </HeadlessUIDialog>
 
-                 */
-            }
+            <NavLink to="ercansualp" className={classNames("group transition-all", {
+                "h-14": height && height >= 600,
+                "h-13": height && height < 600
+            })}>
+                {({ isActive }) => (
+                    <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                        "my-1": height && height >= 600,
+                        "my-0.5": height && height < 600
+                    })}>
+                        <div className="flex gap-x-4 items-center">
+                            <>
+                                <img src={UserAvatar} alt="" width={24} height={24} className={classNames("rounded-full group-hover:scale-105 transition-all", {
+                                    "border-2 border-[#f5f5f5]": isActive
+                                })}/>
+                                {
+                                    sidebarWidth > 73 ? (
+                                        <span className={classNames("leading-5 text-base mt-0.5", {
+                                            "font-bold": isActive,
+                                            "font-normal": !isActive
+                                        })}>Profil</span>
+                                    ) : ""
+                                }
+                            </>
+                        </div>
+                    </div>
+                )}
+            </NavLink>
 
+            <MenuFooter />
         </div>
     )
 }
