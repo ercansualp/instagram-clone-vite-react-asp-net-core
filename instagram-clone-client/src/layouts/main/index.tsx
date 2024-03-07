@@ -50,7 +50,7 @@ export default function Main(props: props) {
     }, [sidebarSection]);
 
     return (
-        <div className={classNames("flex min-h-screen bg-black text-[#f5f5f5]", {
+        <div className={classNames("flex min-h-screen bg-black text-[#f5f5f5] overflow-y-scroll", {
             "flex-col": width && width < 768
         })}>
             { width && width >= 768 ? <Sidebar /> : "" }
