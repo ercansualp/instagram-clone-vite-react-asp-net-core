@@ -5,8 +5,15 @@ import NewPost from "~/components/new-post";
 import {NavLink} from "react-router-dom";
 import UserAvatar from "~/assets/img/user.jpg";
 import classNames from "classnames";
+import {ReactNode} from "react";
 
-const footerItems = [
+type footerItems = {
+    url: string;
+    activeIcon: ReactNode;
+    passiveIcon: ReactNode;
+}
+
+const footerItems: footerItems|ReactNode[] = [
     {
         url: "/",
         activeIcon: <HomeIcon width={24} height={24} active={true} />,
@@ -32,12 +39,12 @@ const footerItems = [
 
 export default function Footer() {
     return (
-        <div className="h-[50px] fixed bottom-0 left-0 w-full">
+        <div className="h-[50px] fixed bottom-0 left-0 w-full bg-black">
             <div className="h-[49px] border-t border-t-[#363636] flex flex-row justify-evenly">
                 <div className="flex justify-evenly w-full">
                     {
                         footerItems.map((item, index) => (
-                            item.url ? <FooterItem key={index} item={item} /> : (
+                            item.url && item.url ? <FooterItem key={index} item={item} /> : (
                                 <HeadlessUIDialog icon={item}>
                                     <NewPost />
                                 </HeadlessUIDialog>

@@ -123,12 +123,6 @@ export default function HeadlessUIDialog(props: props) {
     const sidebarWidth = useSidebarWidth();
     const { height } = UseWindowDimensions();
 
-    const handleClick = () => {
-        if(onClick)
-            onClick();
-        setIsOpen(true);
-    }
-
     return (
         <>
             {

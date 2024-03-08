@@ -98,7 +98,7 @@ export default function Threads() {
 
                         <Popover.Panel className={classNames("transition-all z-10 fixed left-0 top-0 w-[266px] bg-[#262626] rounded-2xl flex flex-col", {
                             "p-2": !changeAppearance
-                        })} style={{ transform: sidebarWidth && sidebarWidth !== 73 ? `translate(12px, ${height - 76}px) translate(0px, -100%)` : `translate(60px, ${height - 20}px) translate(0px, -100%)` }}>
+                        })} style={{ transform: sidebarWidth && sidebarWidth !== 73 ? `translate(12px, ${height && height - 76}px) translate(0px, -100%)` : `translate(60px, ${height && height - 20}px) translate(0px, -100%)` }}>
                             {
                                 !changeAppearance ? moreOptionsItems.map((item, index) => (
                                     <MoreOptionsItem key={index} item={item} />

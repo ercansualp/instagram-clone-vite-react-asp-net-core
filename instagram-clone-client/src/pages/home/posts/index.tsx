@@ -3,6 +3,8 @@ import DefaultAvatar from "~/assets/img/user.jpg";
 import {CommentIcon, HeartIcon, PostMoreOptionsIcon, SavePostIcon} from "~/assets/icons.tsx";
 import ExamplePost from "~/assets/img/example_post.jpg";
 import ShowedAllPostsImage from "~/assets/img/showed_all_posts.png";
+import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
+import classNames from "classnames";
 
 export default function Posts() {
     return (
@@ -16,8 +18,13 @@ export default function Posts() {
 }
 
 function Post() {
+    const { width } = UseWindowDimensions();
+
     return (
-        <article className="flex flex-col mb-5 pb-4 border-b border-b-[#262626]">
+        <article className={classNames("flex flex-col mb-5 pb-4", {
+            "border-none": width && width < 487,
+            "border-b border-b-[#262626]": width && width >= 487
+        })}>
             <PostHeader />
             <PostContent />
             <PostFooter />
@@ -82,6 +89,8 @@ function PostContent() {
 
 // post footer
 function PostFooter() {
+    const { width } = UseWindowDimensions();
+
     return (
         <div className="flex flex-col">
             <div className="my-1 flex items-center justify-between">
@@ -103,15 +112,19 @@ function PostFooter() {
                     <SavePostIcon width={24} height={24} className="text-[#f5f5f5] group-hover:text-[#8e8e8e]" />
                 </button>
             </div>
-            <div className="mt-2 h-[18px] max-h-20">
-                <textarea
-                    aria-label="Yorum ekle..."
-                    placeholder="Yorum ekle..."
-                    autoComplete="off"
-                    autoCorrect="off"
-                    className="text-[#f5f5f5] text-sm font-normal leading-[18px] outline-none w-full h-[18px] max-h-20 min-h-[18px] bg-black resize-none overflow-hidden"
-                ></textarea>
-            </div>
+            {
+                width && width < 487 ? null : (
+                    <div className="mt-2 h-[18px] max-h-20">
+                        <textarea
+                            aria-label="Yorum ekle..."
+                            placeholder="Yorum ekle..."
+                            autoComplete="off"
+                            autoCorrect="off"
+                            className="text-[#f5f5f5] text-sm font-normal leading-[18px] outline-none w-full h-[18px] max-h-20 min-h-[18px] bg-black resize-none overflow-hidden"
+                        ></textarea>
+                    </div>
+                )
+            }
         </div>
     )
 }

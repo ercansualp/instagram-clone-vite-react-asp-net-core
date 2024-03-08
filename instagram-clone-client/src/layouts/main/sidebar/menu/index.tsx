@@ -7,7 +7,6 @@ import {
     ReelsIcon,
     SearchIcon
 } from "~/assets/icons.tsx";
-import MenuItem from "~/layouts/main/sidebar/menu/menu-item";
 import {NavLink, Link} from "react-router-dom";
 import classNames from "classnames";
 import {setSidebarWidth} from "~/store/dimensions/actions.tsx";
@@ -19,6 +18,7 @@ import HeadlessUIDialog from "~/components/headlessUIDialog";
 import UserAvatar from "~/assets/img/user.jpg";
 import MenuFooter from "~/layouts/main/sidebar/menu/menu-footer";
 
+/*
 const menuItems = [
     {
         title: "Ana Sayfa",
@@ -39,6 +39,7 @@ const menuItems = [
         passiveIcon: <ReelsIcon width={24} height={24} active={false} className="group-hover:scale-105 transition-all" />
     }
 ]
+*/
 
 export default function Menu() {
     const sidebarWidth = useSidebarWidth();
@@ -327,7 +328,7 @@ export default function Menu() {
                 )
             }
 
-            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur" onClick={() => handleClick({value:false}, index)}>
+            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur" onClick={() => handleClick({value:false})}>
                 <NewPost />
             </HeadlessUIDialog>
 

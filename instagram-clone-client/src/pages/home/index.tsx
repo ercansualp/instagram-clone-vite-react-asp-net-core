@@ -2,8 +2,10 @@ import {useState} from "react";
 import HomeHeader from "~/pages/home/home-header";
 import HomeRightbar from "~/pages/home/home-rightbar";
 import Posts from "~/pages/home/posts";
+import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 
 export default function Home() {
+    const { width } = UseWindowDimensions();
     const [content, setContent] = useState(true);
 
     if(content)
@@ -16,7 +18,9 @@ export default function Home() {
                     {/* <Posts /> */}
                     <Posts />
                 </div>
-                <HomeRightbar />
+                {
+                    width && width < 1160 ? null : <HomeRightbar />
+                }
             </div>
         )
     return (

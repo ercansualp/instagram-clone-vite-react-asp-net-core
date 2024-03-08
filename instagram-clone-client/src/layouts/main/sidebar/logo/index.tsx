@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";
-import classNames from "classnames";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 
 export default function Logo() {
