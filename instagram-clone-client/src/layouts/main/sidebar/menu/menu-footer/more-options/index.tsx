@@ -20,7 +20,7 @@ export default function Threads() {
     const sidebarWidth = useSidebarWidth();
     const { height } = UseWindowDimensions();
     const [changeAppearance, setChangeAppearance] = useState(false);
-    const [moreOptionsItems, setMoreOptionsItems] = useState([
+    const moreOptionsItems = [
         {
             url: "accounts/edit",
             title: "Ayarlar",
@@ -63,7 +63,7 @@ export default function Threads() {
         {
             title: "Çıkış yap",
         }
-    ]);
+    ]
     const [enabled, setEnabled] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
 

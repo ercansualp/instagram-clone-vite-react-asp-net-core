@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import {Link} from "react-router-dom";
 import {ThreadsIcon} from "~/assets/icons.tsx";
 import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";

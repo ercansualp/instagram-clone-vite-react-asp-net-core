@@ -5,15 +5,8 @@ import NewPost from "~/components/new-post";
 import {NavLink} from "react-router-dom";
 import UserAvatar from "~/assets/img/user.jpg";
 import classNames from "classnames";
-import {ReactNode} from "react";
 
-type footerItems = {
-    url: string;
-    activeIcon: ReactNode;
-    passiveIcon: ReactNode;
-}
-
-const footerItems: footerItems|ReactNode[] = [
+const footerItems: any = [
     {
         url: "/",
         activeIcon: <HomeIcon width={24} height={24} active={true} />,

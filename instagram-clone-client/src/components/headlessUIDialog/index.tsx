@@ -113,12 +113,11 @@ import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";
 type props = {
     icon: ReactNode,
     children: ReactNode,
-    title: string|null,
-    onClick: () => void|null
+    title?: string|null,
 }
 
 export default function HeadlessUIDialog(props: props) {
-    const { icon, children, title = null, onClick = null } = props;
+    const { icon, children, title = null } = props;
     const [isOpen, setIsOpen] = useState(false);
     const sidebarWidth = useSidebarWidth();
     const { height } = UseWindowDimensions();

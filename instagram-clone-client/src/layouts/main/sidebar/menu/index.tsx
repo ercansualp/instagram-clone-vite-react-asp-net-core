@@ -328,7 +328,7 @@ export default function Menu() {
                 )
             }
 
-            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur" onClick={() => handleClick({value:false})}>
+            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur">
                 <NewPost />
             </HeadlessUIDialog>
 

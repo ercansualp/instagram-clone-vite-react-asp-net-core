@@ -1,4 +1,3 @@
-import {useState} from "react";
 import HomeHeader from "~/pages/home/home-header";
 import HomeRightbar from "~/pages/home/home-rightbar";
 import Posts from "~/pages/home/posts";
@@ -6,7 +5,8 @@ import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 
 export default function Home() {
     const { width } = UseWindowDimensions();
-    const [content, setContent] = useState(true);
+    // const [content, setContent] = useState(true);
+    const content = true;
 
     if(content)
         return (
