@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="h-[49px] border-t border-t-[#363636] flex flex-row justify-evenly">
                 <div className="flex justify-evenly w-full">
                     {
-                        footerItems.map((item, index) => (
+                        footerItems.map((item: any, index: number) => (
                             item.url && item.url ? <FooterItem key={index} item={item} /> : (
                                 <HeadlessUIDialog icon={item}>
                                     <NewPost />
