@@ -22,21 +22,44 @@ export default function Main(props: props) {
             {
                 setSidebarWidth(336);
                 document.documentElement.style.setProperty("--sidebar-width", 336 + "px");
+                document.documentElement.style.setProperty("--content-margin", 336 + "px");
             }
             else if(width >= 1264 && width < 1920)
             {
                 setSidebarWidth(245);
                 document.documentElement.style.setProperty("--sidebar-width", 245 + "px");
+                document.documentElement.style.setProperty("--content-margin", 245 + "px");
             }
             else if(width >= 768 && width < 1264)
             {
                 setSidebarWidth(73);
                 document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
+                document.documentElement.style.setProperty("--content-margin", 73 + "px");
             }
             else
             {
                 setSidebarWidth(0);
                 document.documentElement.style.setProperty("--sidebar-width", 0 + "px");
+                document.documentElement.style.setProperty("--content-margin", 0 + "px");
+            }
+        }
+        else
+        {
+            if(width && width >= 1920)
+            {
+                document.documentElement.style.setProperty("--content-margin", 336 + "px");
+            }
+            else if(width && width >= 1264 && width < 1920)
+            {
+                document.documentElement.style.setProperty("--content-margin", 245 + "px");
+            }
+            else if(width && width >= 768 && width < 1264)
+            {
+                document.documentElement.style.setProperty("--content-margin", 73 + "px");
+            }
+            else
+            {
+                document.documentElement.style.setProperty("--content-margin", 0 + "px");
             }
         }
     }, [width])
@@ -44,20 +67,21 @@ export default function Main(props: props) {
     useEffect(() => {
         if(sidebarSection)
         {
+            console.log("b")
             setSidebarWidth(73);
             document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
         }
     }, [sidebarSection]);
 
     return (
-        <div className={classNames("flex min-h-screen bg-black text-[#f5f5f5]", {
+        <div className={classNames("flex min-h-screen bg-black text-[#f5f5f5] transition-all", {
             "flex-col": width && width < 768
         })}>
-            { width && width >= 768 ? <Sidebar /> : "" }
-            <div className="grow ml-[var(--sidebar-width)]">
+            { width && width >= 768 ? <Sidebar /> : null }
+            <div className="grow ml-[var(--content-margin)]">
                 {children}
             </div>
-            { width && width < 768 ? <Footer /> : "" }
+            { width && width < 768 ? <Footer /> : null }
         </div>
     )
 }

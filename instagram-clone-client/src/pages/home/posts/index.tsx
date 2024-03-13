@@ -11,6 +11,10 @@ export default function Posts() {
         <div className="mt-3 flex flex-col items-center">
             <div className="" style={{ width: "min(470px, 100vw)" }}>
                 <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
                 <ShowedAllPosts />
             </div>
         </div>

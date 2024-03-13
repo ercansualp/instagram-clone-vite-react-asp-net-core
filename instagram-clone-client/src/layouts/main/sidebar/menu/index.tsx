@@ -17,6 +17,9 @@ import NewPost from "~/components/new-post";
 import HeadlessUIDialog from "~/components/headlessUIDialog";
 import UserAvatar from "~/assets/img/user.jpg";
 import MenuFooter from "~/layouts/main/sidebar/menu/menu-footer";
+import {setSidebarSection} from "~/store/sidebar/actions.tsx";
+import SidebarSection from "~/layouts/main/sidebar-section";
+import {useSidebarSection} from "~/store/sidebar/hooks.tsx";
 
 /*
 const menuItems = [
@@ -92,6 +95,8 @@ export default function Menu() {
             value: true
         }
     ]);
+    const sidebarSection = useSidebarSection();
+    const [value, setValue] = useState(true);
 
     const handleClick = (item: any, index: number = -1) => {
         // value değeri eğer false ise search butonu veya bildirimler butonu dışında sidebar'da başka herhangi bir item'e tıklanıldığında ekran genişliğini kontrol edip ona göre bir işlem gerçekleştirecek. Yok eğer true ise search veya bildirimler butonuna tıkladı demektir bu durumda da ekran genişliğini dikkate almadan sidebar genişliğini direkt olarak 73px'e ayarlayacaktır.
@@ -102,31 +107,45 @@ export default function Menu() {
 
         if(item.value)
         {
+            setSidebarSection(true);
             setSidebarWidth(73);
             document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
+            if(item.url === "direct/inbox")
+            {
+                document.documentElement.style.setProperty("--content-margin", 73 + "px");
+            }
+            if(item.title === "Ara")
+                setValue(true);
+            if(item.title === "Bildirimler")
+                setValue(false);
         }
         else {
+            setSidebarSection(false);
             if(width)
             {
                 if(width >= 1920)
                 {
                     setSidebarWidth(336);
                     document.documentElement.style.setProperty("--sidebar-width", 336 + "px");
+                    document.documentElement.style.setProperty("--content-margin", 336 + "px");
                 }
                 else if(width >= 1264 && width < 1920)
                 {
                     setSidebarWidth(245);
                     document.documentElement.style.setProperty("--sidebar-width", 245 + "px");
+                    document.documentElement.style.setProperty("--content-margin", 245 + "px");
                 }
                 else if(width >= 768 && width < 1264)
                 {
                     setSidebarWidth(73);
                     document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
+                    document.documentElement.style.setProperty("--content-margin", 73 + "px");
                 }
                 else
                 {
                     setSidebarWidth(0);
                     document.documentElement.style.setProperty("--sidebar-width", 0 + "px");
+                    document.documentElement.style.setProperty("--content-margin", 0 + "px");
                 }
             }
         }
@@ -168,125 +187,151 @@ export default function Menu() {
     }
 
     return (
-        <div className="grow flex flex-col">
-            {
-                /*
+        <>
+            <div className="grow flex flex-col">
+                {
+                    /*
 
-                <NavLink to="/" className="h-14" onClick={() => handleClick(false)}>
-                {({ isActive }) => (
+                    <NavLink to="/" className="h-14" onClick={() => handleClick(false)}>
+                    {({ isActive }) => (
+                        <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
+                            <div className="flex gap-x-4 items-center">
+                                <>
+                                    <HomeIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
+                                    {
+                                        sidebarWidth > 73 ? (
+                                            <span className={classNames("leading-5 text-base mt-0.5", {
+                                                "font-bold": isActive,
+                                                "font-normal": !isActive
+                                            })}>Ana Sayfa</span>
+                                        ) : ""
+                                    }
+                                </>
+                            </div>
+                        </div>
+                    )}
+                </NavLink>
+
+                <div className="h-14 cursor-pointer" onClick={() => handleClick(true)}>
                     <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
                         <div className="flex gap-x-4 items-center">
-                            <>
-                                <HomeIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
-                                {
-                                    sidebarWidth > 73 ? (
-                                        <span className={classNames("leading-5 text-base mt-0.5", {
-                                            "font-bold": isActive,
-                                            "font-normal": !isActive
-                                        })}>Ana Sayfa</span>
-                                    ) : ""
-                                }
-                            </>
+                            <SearchIcon width={24} height={24} className="group-hover:scale-105 transition-all" />
+                            {
+                                sidebarWidth > 73 ? (
+                                    <span className={classNames("leading-5 text-base mt-0.5", {
+                                        "font-bold": false,
+                                        "font-normal": !false
+                                    })}>Ara</span>
+                                ) : ""
+                            }
                         </div>
-                    </div>
-                )}
-            </NavLink>
-
-            <div className="h-14 cursor-pointer" onClick={() => handleClick(true)}>
-                <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
-                    <div className="flex gap-x-4 items-center">
-                        <SearchIcon width={24} height={24} className="group-hover:scale-105 transition-all" />
-                        {
-                            sidebarWidth > 73 ? (
-                                <span className={classNames("leading-5 text-base mt-0.5", {
-                                    "font-bold": false,
-                                    "font-normal": !false
-                                })}>Ara</span>
-                            ) : ""
-                        }
                     </div>
                 </div>
-            </div>
 
-            <NavLink to="explore" className="h-14" onClick={() => handleClick(false)}>
-                {({ isActive }) => (
-                    <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
-                        <div className="flex gap-x-4 items-center">
-                            <>
-                                <ExploreIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
-                                {
-                                    sidebarWidth > 73 ? (
-                                        <span className={classNames("leading-5 text-base mt-0.5", {
-                                            "font-bold": isActive,
-                                            "font-normal": !isActive
-                                        })}>Keşfet</span>
-                                    ) : ""
-                                }
-                            </>
+                <NavLink to="explore" className="h-14" onClick={() => handleClick(false)}>
+                    {({ isActive }) => (
+                        <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
+                            <div className="flex gap-x-4 items-center">
+                                <>
+                                    <ExploreIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
+                                    {
+                                        sidebarWidth > 73 ? (
+                                            <span className={classNames("leading-5 text-base mt-0.5", {
+                                                "font-bold": isActive,
+                                                "font-normal": !isActive
+                                            })}>Keşfet</span>
+                                        ) : ""
+                                    }
+                                </>
+                            </div>
                         </div>
-                    </div>
-                )}
-            </NavLink>
+                    )}
+                </NavLink>
 
-            <NavLink to="reels" className="h-14" onClick={() => handleClick(false)}>
-                {({ isActive }) => (
-                    <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
-                        <div className="flex gap-x-4 items-center">
-                            <>
-                                <ReelsIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
-                                {
-                                    sidebarWidth > 73 ? (
-                                        <span className={classNames("leading-5 text-base mt-0.5", {
-                                            "font-bold": isActive,
-                                            "font-normal": !isActive
-                                        })}>Reels</span>
-                                    ) : ""
-                                }
-                            </>
+                <NavLink to="reels" className="h-14" onClick={() => handleClick(false)}>
+                    {({ isActive }) => (
+                        <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
+                            <div className="flex gap-x-4 items-center">
+                                <>
+                                    <ReelsIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
+                                    {
+                                        sidebarWidth > 73 ? (
+                                            <span className={classNames("leading-5 text-base mt-0.5", {
+                                                "font-bold": isActive,
+                                                "font-normal": !isActive
+                                            })}>Reels</span>
+                                        ) : ""
+                                    }
+                                </>
+                            </div>
                         </div>
-                    </div>
-                )}
-            </NavLink>
+                    )}
+                </NavLink>
 
-            <NavLink to="direct/inbox" className="h-14" onClick={() => handleClick(true)}>
-                {({ isActive }) => (
-                    <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
-                        <div className="flex gap-x-4 items-center">
-                            <>
-                                <MessengerIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
-                                {
-                                    sidebarWidth > 73 ? (
-                                        <span className={classNames("leading-5 text-base mt-0.5", {
-                                            "font-bold": isActive,
-                                            "font-normal": !isActive
-                                        })}>Mesajlar</span>
-                                    ) : ""
-                                }
-                            </>
+                <NavLink to="direct/inbox" className="h-14" onClick={() => handleClick(true)}>
+                    {({ isActive }) => (
+                        <div className="h-12 p-3 my-1 transition-all hover:bg-[#ffffff1a] rounded-lg group">
+                            <div className="flex gap-x-4 items-center">
+                                <>
+                                    <MessengerIcon width={24} height={24} active={isActive} className="group-hover:scale-105 transition-all" />
+                                    {
+                                        sidebarWidth > 73 ? (
+                                            <span className={classNames("leading-5 text-base mt-0.5", {
+                                                "font-bold": isActive,
+                                                "font-normal": !isActive
+                                            })}>Mesajlar</span>
+                                        ) : ""
+                                    }
+                                </>
+                            </div>
                         </div>
-                    </div>
-                )}
-            </NavLink>
+                    )}
+                </NavLink>
 
 
 
 
-                 */
-            }
+                     */
+                }
 
-            {
-                sidebarItems.map((item, index) =>
-                    item.url ? (
-                        <Link key={index} to={item.url} className={classNames({
-                            "h-14": height && height >= 600,
-                            "h-13": height && height < 600
-                        })} onClick={() => handleClick(item, index)}>
-                            <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
-                                "my-1": height && height >= 600,
-                                "my-0.5": height && height < 600
-                            })}>
-                                <div className="flex gap-x-4 items-center">
-                                    <>
+                {
+                    sidebarItems.map((item, index) =>
+                        item.url ? (
+                            <Link key={index} to={item.url} className={classNames({
+                                "h-14": height && height >= 600,
+                                "h-13": height && height < 600
+                            })} onClick={() => handleClick(item, index)}>
+                                <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                                    "my-1": height && height >= 600,
+                                    "my-0.5": height && height < 600
+                                })}>
+                                    <div className="flex gap-x-4 items-center">
+                                        <>
+                                            { item.active ? item.activeIcon : item.passiveIcon }
+                                            {
+                                                sidebarWidth > 73 ? (
+                                                    <span className={classNames("leading-5 text-base mt-0.5", {
+                                                        "font-bold": item.active,
+                                                        "font-normal": !item.active
+                                                    })}>{item.title}</span>
+                                                ) : ""
+                                            }
+                                        </>
+                                    </div>
+                                </div>
+                            </Link>
+                        ) : (
+                            <div key={index} className={classNames("cursor-pointer", {
+                                "h-14": height && height >= 600,
+                                "h-13": height && height < 600
+                            })} onClick={() => handleClick(item, index)}>
+                                <div className={classNames("h-12 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                                    "border border-[#dbdbdb] p-[11px]": item.active,
+                                    "p-3": !item.active,
+                                    "my-1": height && height >= 600,
+                                    "my-0.5": height && height < 600
+                                })}>
+                                    <div className="flex gap-x-4 items-center">
                                         { item.active ? item.activeIcon : item.passiveIcon }
                                         {
                                             sidebarWidth > 73 ? (
@@ -296,71 +341,50 @@ export default function Menu() {
                                                 })}>{item.title}</span>
                                             ) : ""
                                         }
-                                    </>
+                                    </div>
                                 </div>
                             </div>
-                        </Link>
-                    ) : (
-                        <div key={index} className={classNames("cursor-pointer", {
-                            "h-14": height && height >= 600,
-                            "h-13": height && height < 600
-                        })} onClick={() => handleClick(item, index)}>
-                            <div className={classNames("h-12 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
-                                "border border-[#dbdbdb] p-[11px]": item.active,
-                                "p-3": !item.active,
-                                "my-1": height && height >= 600,
-                                "my-0.5": height && height < 600
-                            })}>
-                                <div className="flex gap-x-4 items-center">
-                                    { item.active ? item.activeIcon : item.passiveIcon }
+                        )
+                    )
+                }
+
+                <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur">
+                    <NewPost />
+                </HeadlessUIDialog>
+
+                <NavLink to="ercansualp" className={classNames("group transition-all", {
+                    "h-14": height && height >= 600,
+                    "h-13": height && height < 600
+                })}>
+                    {({ isActive }) => (
+                        <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
+                            "my-1": height && height >= 600,
+                            "my-0.5": height && height < 600
+                        })}>
+                            <div className="flex gap-x-4 items-center">
+                                <>
+                                    <img src={UserAvatar} alt="" width={24} height={24} className={classNames("rounded-full group-hover:scale-105 transition-all", {
+                                        "border-2 border-[#f5f5f5]": isActive
+                                    })}/>
                                     {
                                         sidebarWidth > 73 ? (
                                             <span className={classNames("leading-5 text-base mt-0.5", {
-                                                "font-bold": item.active,
-                                                "font-normal": !item.active
-                                            })}>{item.title}</span>
+                                                "font-bold": isActive,
+                                                "font-normal": !isActive
+                                            })}>Profil</span>
                                         ) : ""
                                     }
-                                </div>
+                                </>
                             </div>
                         </div>
-                    )
-                )
+                    )}
+                </NavLink>
+
+                <MenuFooter />
+            </div>
+            {
+                sidebarSection ? <SidebarSection value={value} /> : null
             }
-
-            <HeadlessUIDialog icon={<NewPostIcon width={24} height={24} active={true} className="group-hover:scale-105 transition-all" />} title="Oluştur">
-                <NewPost />
-            </HeadlessUIDialog>
-
-            <NavLink to="ercansualp" className={classNames("group transition-all", {
-                "h-14": height && height >= 600,
-                "h-13": height && height < 600
-            })}>
-                {({ isActive }) => (
-                    <div className={classNames("h-12 p-3 transition-all hover:bg-[#ffffff1a] rounded-lg group", {
-                        "my-1": height && height >= 600,
-                        "my-0.5": height && height < 600
-                    })}>
-                        <div className="flex gap-x-4 items-center">
-                            <>
-                                <img src={UserAvatar} alt="" width={24} height={24} className={classNames("rounded-full group-hover:scale-105 transition-all", {
-                                    "border-2 border-[#f5f5f5]": isActive
-                                })}/>
-                                {
-                                    sidebarWidth > 73 ? (
-                                        <span className={classNames("leading-5 text-base mt-0.5", {
-                                            "font-bold": isActive,
-                                            "font-normal": !isActive
-                                        })}>Profil</span>
-                                    ) : ""
-                                }
-                            </>
-                        </div>
-                    </div>
-                )}
-            </NavLink>
-
-            <MenuFooter />
-        </div>
+        </>
     )
 }
