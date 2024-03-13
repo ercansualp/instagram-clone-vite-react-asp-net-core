@@ -9,11 +9,11 @@ import {VerifiedAccountIcon} from "~/assets/icons.tsx";
 import UserPreview from "~/pages/home/home-rightbar/user-preview";
 import {useState} from "react";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
-import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";
+import {useContentMargin} from "~/store/dimensions/hooks.tsx";
 
 export default function HomeRightbar() {
     const { width } = UseWindowDimensions();
-    const sidebarWidth = useSidebarWidth();
+    const contentMargin = useContentMargin();
     const users = [
         {
             username: "madhuridixitnene",
@@ -42,15 +42,15 @@ export default function HomeRightbar() {
     const handleMouseOver = (index: number, isAvatar: boolean = true) => {
         if(width)
         {
-            let userPreviewTranslateX = width - sidebarWidth, userPreviewTranslateY;
+            let userPreviewTranslateX = width - contentMargin, userPreviewTranslateY;
             if(!isAvatar)
             {
-                userPreviewTranslateX = sidebarWidth + (userPreviewTranslateX - 1013) / 2 + 630 + 64 + 56
+                userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64 + 56
                 userPreviewTranslateY = 184 + 60 * index;
             }
             else
             {
-                userPreviewTranslateX = sidebarWidth + (userPreviewTranslateX - 1013) / 2 + 630 + 64
+                userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64
                 userPreviewTranslateY = 205 + 60 * index;
             }
             document.documentElement.style.setProperty("--userPreview-translate-x", userPreviewTranslateX + "px");
