@@ -10,34 +10,66 @@ import UserPreview from "~/pages/home/home-rightbar/user-preview";
 import {useState} from "react";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 import {useContentMargin} from "~/store/dimensions/hooks.tsx";
+import {User} from "~/utils/types.tsx";
 
 export default function HomeRightbar() {
-    const { width } = UseWindowDimensions();
+    const { width, height } = UseWindowDimensions();
     const contentMargin = useContentMargin();
-    const users = [
+    const users: User[] = [
         {
+            id: 1,
             username: "madhuridixitnene",
-            avatar: U1
+            avatar: (U1 as unknown) as string,
+            fullName: "Madhuridi Xitnene",
+            postCount: 11400,
+            followCount: 0,
+            followersCount: 12600000,
+            verified: true
         },
         {
+            id: 2,
             username: "antogriezmann",
-            avatar: U2
+            avatar: (U2 as unknown) as string,
+            fullName: "Madhuridi Xitnene",
+            postCount: 12400,
+            followCount: 0,
+            followersCount: 12600000,
+            verified: true
         },
         {
+            id: 3,
             username: "delilahbelle",
-            avatar: U3
+            avatar: (U3 as unknown) as string,
+            fullName: "Delilah Belle",
+            postCount: 13400,
+            followCount: 0,
+            followersCount: 12600000,
+            verified: true
         },
         {
+            id: 4,
             username: "kyliejenner",
-            avatar: U4
+            avatar: (U4 as unknown) as string,
+            fullName: "Kylie Jenner",
+            postCount: 14400,
+            followCount: 0,
+            followersCount: 12600000,
+            verified: true
         },
         {
+            id: 5,
             username: "zendaya",
-            avatar: U5
+            avatar: (U5 as unknown) as string,
+            fullName: "zendaya",
+            postCount: 15400,
+            followCount: 0,
+            followersCount: 12600000,
+            verified: true
         }
     ];
     const links = ["Hakkında", "Yardım", "Basın", "API", "İş Fırsatları", "Gizlilik", "Koşullar", "Konumlar", "Dil", "Meta Verified"];
     const [showUserPreview, setShowUserPreview] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<User|null>(null);
 
     const handleMouseOver = (index: number, isAvatar: boolean = true) => {
         if(width)
@@ -45,17 +77,25 @@ export default function HomeRightbar() {
             let userPreviewTranslateX = width - contentMargin, userPreviewTranslateY;
             if(!isAvatar)
             {
-                userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64 + 56
+                if(height && height < 1400)
+                    userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 20
+                else
+                    userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64 + 56
                 userPreviewTranslateY = 184 + 60 * index;
             }
             else
             {
-                userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64
+                if(height && height < 1400)
+                    userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 20
+                else
+                    userPreviewTranslateX = contentMargin + (userPreviewTranslateX - 1013) / 2 + 630 + 64 + 56
                 userPreviewTranslateY = 205 + 60 * index;
             }
             document.documentElement.style.setProperty("--userPreview-translate-x", userPreviewTranslateX + "px");
             document.documentElement.style.setProperty("--userPreview-translate-y", userPreviewTranslateY + "px");
         }
+        const selectedUser = users[index];
+        setSelectedUser(selectedUser);
         setShowUserPreview(true);
     }
 
@@ -93,7 +133,7 @@ export default function HomeRightbar() {
                                                 <img src={user.avatar} alt="" className="w-11 h-11 rounded-full" />
                                             </Link>
                                             <div className="flex flex-col">
-                                                <Link to={"ercansualp"} className="flex gap-x-1 items-center"  onMouseOver={() => handleMouseOver(index, false)} onMouseLeave={handleMouseLeave}>
+                                                <Link to={user.username} className="flex gap-x-1 items-center"  onMouseOver={() => handleMouseOver(index, false)} onMouseLeave={handleMouseLeave}>
                                                     <span className="text-[#f5f5f5] text-sm font-semibold leading-[18px]">{user.username}</span>
                                                     <VerifiedAccountIcon width={12} height={12} />
                                                 </Link>
@@ -125,7 +165,7 @@ export default function HomeRightbar() {
                 </div>
             </div>
 
-            { showUserPreview ? <UserPreview setShowUserPreview={setShowUserPreview} /> : null }
+            { showUserPreview ? <UserPreview setShowUserPreview={setShowUserPreview} user={selectedUser} /> : null }
         </>
     )
 }
