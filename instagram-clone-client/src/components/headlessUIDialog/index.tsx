@@ -111,7 +111,7 @@ import classNames from "classnames";
 import {useSidebarWidth} from "~/store/dimensions/hooks.tsx";
 
 type props = {
-    icon: ReactNode,
+    icon?: ReactNode,
     children: ReactNode,
     title?: string|null,
 }
@@ -131,7 +131,7 @@ export default function HeadlessUIDialog(props: props) {
                         "my-0.5": height && height < 600
                     })}>
                         <button className="w-full flex gap-x-4 h-12">
-                            {icon}
+                            {icon ? icon : null}
                             {
                                 sidebarWidth !== 73 ? (
                                     <span className="leading-5 text-base mt-[3px] font-normal">{title}</span>

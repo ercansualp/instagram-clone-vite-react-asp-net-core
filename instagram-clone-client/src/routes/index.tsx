@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import Protected from "~/routes/Protected.tsx";
 import Home from "~/pages/home";
 import Public from "~/routes/Public.tsx";
@@ -8,8 +8,14 @@ import Register from "~/pages/register";
 import Explore from "~/pages/explore";
 import Reels from "~/pages/reels";
 import Messages from "~/pages/messages";
+import Profile from "~/pages/profile";
+import Main from "~/layouts/main";
 
 const rotues = createBrowserRouter([
+    {
+        path: ":username/:profileParam?",
+        element: <Main><Profile /></Main>
+    },
     {
         path: "/",
         element: <Protected />,
