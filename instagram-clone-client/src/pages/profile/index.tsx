@@ -1,6 +1,6 @@
 import DefaultAvatar from "~/assets/img/user.jpg";
 import Avatar from "~/pages/profile/avatar";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
     DiscoverNewPeopleIcon,
     DownArrowIcon,
@@ -45,7 +45,7 @@ export default function Profile() {
                                 </Link>
                                 <div className="grow flex justify-center items-center">
                                     <button className="flex items-center justify-center text-[#f5f5f5]">
-                                        <span className="text-base font-semibold leading-5">ahmeter.233</span>
+                                        <span className="text-base font-semibold leading-5">{username}</span>
                                         <div className="p-2">
                                             <DownArrowIcon width={16} height={16} className="rotate-180" />
                                         </div>
@@ -70,8 +70,8 @@ export default function Profile() {
                                 "items-center": width && width >= 737,
                                 "!gap-y-3": width && width < 736
                             })}>
-                                <Link to={"ercansualp"}>
-                                    <h1 className="text-[#f5f5f5] leading-[25px] text-xl font-normal">ahmeter.233</h1>
+                                <Link to={username}>
+                                    <h1 className="text-[#f5f5f5] leading-[25px] text-xl font-normal">{username}</h1>
                                 </Link>
                                 <div className={classNames("flex gap-x-2", {
                                     "ml-5": width && width >= 737,
@@ -148,7 +148,7 @@ export default function Profile() {
                             </>
                         ) : null
                     }
-                    <PostOptions profileParam={profileParam} />
+                    <PostOptions />
                     {
                         !profileParam ?             <Posts /> :
                         profileParam === "saved" ?  <SavedPosts /> :
@@ -163,23 +163,27 @@ export default function Profile() {
 }
 
 const Button = (props: { children: string }) => {
+    const { width } = UseWindowDimensions();
     const { children } = props;
 
     return (
-        <button className="px-4 h-8 rounded-lg bg-[#363636] flex items-center justify-center text-[#f5f5f5] leading-[18px] font-semibold text-sm hover:bg-[#262626]">
+        <button className={classNames("h-8 rounded-lg bg-[#363636] flex items-center justify-center text-[#f5f5f5] leading-[18px] font-semibold text-sm hover:bg-[#262626]", {
+            "px-[0.81px]": width && width < 361,
+            "px-4": width && width >= 361
+        })}>
             {children}
         </button>
     )
 }
 
-const PostOptions = (props: { profileParam: string|null|undefined }) => {
+const PostOptions = () => {
     const { width } = UseWindowDimensions();
-    const { profileParam } = props;
+    const { username } = useParams();
     const options: { title: string, url: string, value?: string, icon: string|ReactNode }[] = [
-        { title: "gönderiler", url: "/ercansualp", icon: <PostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
-        { title: "", url: "/ercansualp/feed", value: "feed", icon: <FeedIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
-        { title: "kaydedilenler", url: "/ercansualp/saved", value: "saved", icon: <SavedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
-        { title: "etiketlenenler", url: "/ercansualp/tagged", value: "tagged", icon: <MyTaggedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> }
+        { title: "gönderiler", url: `/${username}`, icon: <PostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "", url: `/${username}/feed`, value: "feed", icon: <FeedIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "kaydedilenler", url: `/${username}/saved`, value: "saved", icon: <SavedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "etiketlenenler", url: `/${username}/tagged`, value: "tagged", icon: <MyTaggedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> }
     ];
 
     return (
@@ -191,7 +195,7 @@ const PostOptions = (props: { profileParam: string|null|undefined }) => {
             {
                 options.map((option, index) => {
                     return option.value !== "feed" || width && width < 768 ? (
-                        <PostOption key={index} profileParam={profileParam} title={option.title} url={option.url} value={option.value} icon={(option.icon as unknown) as string} />
+                        <PostOption key={index} title={option.title} url={option.url} value={option.value} icon={(option.icon as unknown) as string} />
                     ) : null
                 })
             }
@@ -199,9 +203,10 @@ const PostOptions = (props: { profileParam: string|null|undefined }) => {
     )
 }
 
-const PostOption = (props: { profileParam: string|null|undefined, title: string, url: string, value?: string, icon: string }) => {
+const PostOption = (props: { title: string, url: string, value?: string, icon: string }) => {
     const { width } = UseWindowDimensions();
-    const { profileParam, title, url, value, icon } = props;
+    const { profileParam } = useParams();
+    const { title, url, value, icon } = props;
 
     return (
         <Link

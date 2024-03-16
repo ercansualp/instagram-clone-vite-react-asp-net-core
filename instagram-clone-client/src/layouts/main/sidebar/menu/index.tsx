@@ -357,7 +357,7 @@ export default function Menu() {
                     <NewPost />
                 </HeadlessUIDialog>
 
-                <NavLink to="ercansualp" className={classNames("group transition-all", {
+                <NavLink to="/ercansualp" className={classNames("group transition-all", {
                     "h-14": height && height >= 600,
                     "h-13": height && height < 600
                 })}>

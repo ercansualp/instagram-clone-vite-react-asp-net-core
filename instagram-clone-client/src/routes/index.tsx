@@ -10,11 +10,16 @@ import Reels from "~/pages/reels";
 import Messages from "~/pages/messages";
 import Profile from "~/pages/profile";
 import Main from "~/layouts/main";
+import PostPreview from "~/pages/post-preview";
 
 const rotues = createBrowserRouter([
     {
         path: ":username/:profileParam?",
         element: <Main><Profile /></Main>
+    },
+    {
+        path: "p/:postId", // p/C4lMB1biHwFalOUgRiGzHolwkNJJctKDAoccxw0/
+        element: <Main><PostPreview /></Main>
     },
     {
         path: "/",
