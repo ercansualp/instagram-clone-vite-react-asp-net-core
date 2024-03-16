@@ -1,7 +1,15 @@
 import DefaultAvatar from "~/assets/img/user.jpg";
 import Avatar from "~/pages/profile/avatar";
 import {Link, NavLink} from "react-router-dom";
-import {MyTaggedPostsIcon, PostsIcon, SavedPostsIcon, SettingsIcon} from "~/assets/icons.tsx";
+import {
+    DiscoverNewPeopleIcon,
+    DownArrowIcon,
+    FeedIcon,
+    MyTaggedPostsIcon,
+    PostsIcon,
+    SavedPostsIcon,
+    SettingsIcon
+} from "~/assets/icons.tsx";
 import Followers from "~/pages/profile/followers";
 import {ReactNode, useState} from "react";
 import { useParams } from 'react-router-dom';
@@ -9,8 +17,11 @@ import classNames from "classnames";
 import Posts from "~/pages/profile/posts";
 import SavedPosts from "~/pages/profile/saved-posts";
 import TaggedPosts from "~/pages/profile/tagged-posts";
+import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
+import Feed from "~/pages/profile/feed";
 
 export default function Profile() {
+    const { width } = UseWindowDimensions();
     const [value, setValue] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState(false);
     const { username, profileParam } = useParams();
@@ -23,56 +34,126 @@ export default function Profile() {
     return (
         <>
             <div className="flex flex-col">
-                <div className="mx-auto pt-[30px] px-5 max-w-[935px] mb-[30px] w-full flex flex-col">
-                    <header className="mb-11 flex gap-x-[30px]">
+                <div className={classNames("mx-auto max-w-[935px] mb-[30px] w-full flex flex-col", {
+                    "px-5 pt-[30px]": width && width >= 768
+                })}>
+                    {
+                        width && width < 768 ? (
+                            <div className="border-b border-b-[#363636] px-4 flex items-center h-[45px]">
+                                <Link to="/" className="mr-2 h-6 w-6">
+                                    <SettingsIcon width={24} height={24} />
+                                </Link>
+                                <div className="grow flex justify-center items-center">
+                                    <button className="flex items-center justify-center text-[#f5f5f5]">
+                                        <span className="text-base font-semibold leading-5">ahmeter.233</span>
+                                        <div className="p-2">
+                                            <DownArrowIcon width={16} height={16} className="rotate-180" />
+                                        </div>
+                                    </button>
+                                </div>
+                                <div className="w-10 h-10 p-2">
+                                    <DiscoverNewPeopleIcon width={24} height={24} />
+                                </div>
+                            </div>
+                        ) : null
+                    }
+                    <header className={classNames("flex gap-x-[30px]", {
+                        "mb-11": width && width >= 737,
+                        "mb-6 py-5": width && width < 737,
+                        "m-4 mb-6 !p-0": width && width < 736,
+                        "!gap-x-7": width && width < 736
+                    })}>
                         <Avatar avatar={(DefaultAvatar as unknown) as string} />
                         <div className="flex flex-col gap-y-5" style={{ flexGrow: 2 }}>
-                            <div className="flex items-center">
+                            <div className={classNames("flex", {
+                                "flex-col gap-y-5 h-full": width && width < 737,
+                                "items-center": width && width >= 737,
+                                "!gap-y-3": width && width < 736
+                            })}>
                                 <Link to={"ercansualp"}>
                                     <h1 className="text-[#f5f5f5] leading-[25px] text-xl font-normal">ahmeter.233</h1>
                                 </Link>
-                                <div className="ml-5 flex gap-x-2">
+                                <div className={classNames("flex gap-x-2", {
+                                    "ml-5": width && width >= 737,
+                                    "grow items-center": width && width < 737
+                                })}>
                                     <Button>Profili düzenle</Button>
                                     <Button>Arşivi gör</Button>
                                 </div>
-                                <button className="ml-[5px] p-2">
-                                    <SettingsIcon width={24} height={24} />
-                                </button>
+                                {
+                                    width && width >= 768 ? (
+                                        <button className="ml-[5px] p-2">
+                                            <SettingsIcon width={24} height={24} />
+                                        </button>
+                                    ) : null
+                                }
                             </div>
-                            <ul className="flex gap-x-10">
-                                <li className="text-[#f5f5f5] text-base leading-[18px]">
-                                    <span className="mr-1 font-semibold leading-[18px]">1</span>
-                                    gönderi
-                                </li>
+                            {
+                                width && width >= 737 ? (
+                                    <>
+                                        <ul className="flex gap-x-10">
+                                            <li className="text-[#f5f5f5] text-base leading-[18px]">
+                                                <span className="mr-1 font-semibold leading-[18px]">1</span>
+                                                gönderi
+                                            </li>
 
-                                <li className="text-[#f5f5f5] text-base leading-[18px]">
-                                    <button onClick={() => handleClick(false)}>
-                                        <span className="mr-1 font-semibold leading-[18px]">1</span>
-                                        takipçi
-                                    </button>
-                                </li>
+                                            <li className="text-[#f5f5f5] text-base leading-[18px]">
+                                                <button onClick={() => handleClick(false)}>
+                                                    <span className="mr-1 font-semibold leading-[18px]">1</span>
+                                                    takipçi
+                                                </button>
+                                            </li>
 
-                                <li className="text-[#f5f5f5] text-base leading-[18px]">
-                                    <button onClick={() => handleClick(true)}>
-                                        <span className="mr-1 font-semibold leading-[18px]">1</span>
-                                        takip
-                                    </button>
-                                </li>
-                            </ul>
-                            <div className="text-[#f5f5f5] text-sm font-normal leading-[18px] max-w-[715px]" style={{ overflowWrap: "break-word" }}>
-                                AAAAA
-                                <br/>
-                                BBBBB
-                                <br/>
-                                CCCCC
-                            </div>
+                                            <li className="text-[#f5f5f5] text-base leading-[18px]">
+                                                <button onClick={() => handleClick(true)}>
+                                                    <span className="mr-1 font-semibold leading-[18px]">1</span>
+                                                    takip
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div className="text-[#f5f5f5] text-sm font-normal leading-[18px] max-w-[715px]" style={{ overflowWrap: "break-word" }}>
+                                            AAAAA
+                                            <br/>
+                                            BBBBB
+                                            <br/>
+                                            CCCCC
+                                        </div>
+                                    </>
+                                ) : null
+                            }
                         </div>
                     </header>
+                    {
+                        width && width < 737 ? (
+                            <>
+                                <div className={classNames("text-[#f5f5f5] text-sm font-normal leading-[18px]", {
+                                    "px-4 pb-[21px]": width && width < 736
+                                })} style={{ overflowWrap: "break-word" }}>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+                                <div className="border-t border-t-[#262626] py-3 grid grid-cols-3 grid-flow-col">
+                                    <div className="flex flex-col items-center text-sm leading-[18px]">
+                                        <span className="text-[#f5f5f5] font-semibold">1</span>
+                                        <span className="text-[#a8a8a8] font-normal">gönderi</span>
+                                    </div>
+
+                                    <div className="flex flex-col items-center text-sm leading-[18px]">
+                                        <span className="text-[#f5f5f5] font-semibold">1</span>
+                                        <span className="text-[#a8a8a8] font-normal">takipçi</span>
+                                    </div>
+                                    <div className="flex flex-col items-center text-sm leading-[18px]">
+                                        <span className="text-[#f5f5f5] font-semibold">1</span>
+                                        <span className="text-[#a8a8a8] font-normal">takip</span>
+                                    </div>
+
+                                </div>
+                            </>
+                        ) : null
+                    }
                     <PostOptions profileParam={profileParam} />
                     {
                         !profileParam ?             <Posts /> :
                         profileParam === "saved" ?  <SavedPosts /> :
-                                                    <TaggedPosts />
+                        profileParam === "tagged" ? <TaggedPosts /> :
+                                                    <Feed />
                     }
                 </div>
             </div>
@@ -92,37 +173,50 @@ const Button = (props: { children: string }) => {
 }
 
 const PostOptions = (props: { profileParam: string|null|undefined }) => {
+    const { width } = UseWindowDimensions();
     const { profileParam } = props;
     const options: { title: string, url: string, value?: string, icon: string|ReactNode }[] = [
-        { title: "gönderiler", url: "/ercansualp", icon: <PostsIcon width={12} height={12} /> },
-        { title: "kaydedilenler", url: "/ercansualp/saved", value: "saved", icon: <SavedPostsIcon width={12} height={12} /> },
-        { title: "etiketlenenler", url: "/ercansualp/tagged", value: "tagged", icon: <MyTaggedPostsIcon width={12} height={12} /> }
+        { title: "gönderiler", url: "/ercansualp", icon: <PostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "", url: "/ercansualp/feed", value: "feed", icon: <FeedIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "kaydedilenler", url: "/ercansualp/saved", value: "saved", icon: <SavedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> },
+        { title: "etiketlenenler", url: "/ercansualp/tagged", value: "tagged", icon: <MyTaggedPostsIcon width={width && width >= 768 ? 12 : 24} height={width && width >= 768 ? 12 : 24} /> }
     ];
 
     return (
-        <div className="border-t border-t-[#262626] flex justify-center items-center gap-x-[60px]">
+        <div className={classNames("border-t border-[#262626]", {
+            "border-b": width && width < 768,
+            "grid grid-cols-4 grid-flow-col": width && width < 736,
+            "flex justify-center items-center gap-x-[60px]": width && width >= 736
+        })}>
             {
-                options.map((option, index) => (
-                    <PostOption key={index} profileParam={profileParam} title={option.title} url={option.url} value={option.value} icon={(option.icon as unknown) as string} />
-                ))
+                options.map((option, index) => {
+                    return option.value !== "feed" || width && width < 768 ? (
+                        <PostOption key={index} profileParam={profileParam} title={option.title} url={option.url} value={option.value} icon={(option.icon as unknown) as string} />
+                    ) : null
+                })
             }
         </div>
     )
 }
 
 const PostOption = (props: { profileParam: string|null|undefined, title: string, url: string, value?: string, icon: string }) => {
+    const { width } = UseWindowDimensions();
     const { profileParam, title, url, value, icon } = props;
-    console.log("aa: ", profileParam);
+
     return (
         <Link
             to={url}
-            className={classNames("uppercase border-t -mt-px h-[52px] flex items-center justify-center gap-x-1.5", {
+            className={classNames("uppercase border-t -mt-px gap-x-1.5 flex items-center justify-center", {
                 "text-[#f5f5f5] border-t-[#f5f5f5]": profileParam === value || (!value && !profileParam),
-                "text-[#a8a8a8] border-t-[#262626]": profileParam !== value
+                "text-[#a8a8a8] border-t-[#262626]": profileParam !== value,
+                "!border-t-[#262626]": width && width < 768,
+                "!text-[#0095f6]": (width && width < 768) && (profileParam === value || (!value && !profileParam)),
+                "h-11": width && width < 736,
+                "h-[52px]": width && width >= 736
             })}
         >
             {icon}
-            <span className="text-xs font-semibold leading-[18px]">{title}</span>
+            { width && width >= 768 ? <span className="text-xs font-semibold leading-[18px]">{title}</span> : null }
         </Link>
     )
 }

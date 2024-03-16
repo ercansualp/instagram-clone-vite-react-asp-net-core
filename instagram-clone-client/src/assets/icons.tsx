@@ -208,3 +208,21 @@ export const MyTaggedPostsIcon = (props: props) => {
 
     return <svg style={style} aria-label="" className={className} fill="currentColor" height={height} role="img" viewBox="0 0 24 24" width={width}><title></title><path d="M10.201 3.797 12 1.997l1.799 1.8a1.59 1.59 0 0 0 1.124.465h5.259A1.818 1.818 0 0 1 22 6.08v14.104a1.818 1.818 0 0 1-1.818 1.818H3.818A1.818 1.818 0 0 1 2 20.184V6.08a1.818 1.818 0 0 1 1.818-1.818h5.26a1.59 1.59 0 0 0 1.123-.465Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M18.598 22.002V21.4a3.949 3.949 0 0 0-3.948-3.949H9.495A3.949 3.949 0 0 0 5.546 21.4v.603" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><circle cx="12.072" cy="11.075" fill="none" r="3.556" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>
 }
+
+export const FeedIcon = (props: props) => {
+    const { width, height, className = "", style = {} } = props;
+
+    return <svg style={style} aria-label="Akış" className={className} fill="currentColor" height={height} role="img" viewBox="0 0 24 24" width={width}><title>Akış</title><rect fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="12" x="6" y="7"></rect><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" x1="6.002" x2="18" y1="3.004" y2="3.004"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" x1="6.002" x2="18" y1="21" y2="21"></line></svg>
+}
+
+export const DownArrowIcon = (props: props) => {
+    const { width, height, className = "", style = {} } = props;
+
+    return <svg style={style} aria-label="Aşağı Ok Simgesi" className={className} fill="currentColor" height={height} role="img" viewBox="0 0 24 24" width={width}><title>Aşağı Ok Simgesi</title><path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path></svg>
+}
+
+export const DiscoverNewPeopleIcon = (props: props) => {
+    const { width, height, className = "", style = {} } = props;
+
+    return <svg style={style} aria-label="Yeni İnsanlar Keşfet" className={className} fill="currentColor" height={height} role="img" viewBox="0 0 48 48" width={width}><title>Yeni İnsanlar Keşfet</title><path d="M32 25.5c5.2 0 9.5-4.3 9.5-9.5S37.2 6.5 32 6.5s-9.5 4.3-9.5 9.5 4.3 9.5 9.5 9.5zm0-16c3.6 0 6.5 2.9 6.5 6.5s-2.9 6.5-6.5 6.5-6.5-2.9-6.5-6.5 2.9-6.5 6.5-6.5zm5.5 19h-11c-5.5 0-10 4.5-10 10V40c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-1.5c0-3.9 3.1-7 7-7h11c3.9 0 7 3.1 7 7V40c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-1.5c0-5.5-4.5-10-10-10zm-20-4.5c0-.8-.7-1.5-1.5-1.5h-5.5V17c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v5.5H2c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h5.5V31c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-5.5H16c.8 0 1.5-.7 1.5-1.5z"></path></svg>
+}
