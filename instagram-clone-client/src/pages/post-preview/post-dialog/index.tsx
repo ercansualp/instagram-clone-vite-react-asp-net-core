@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import ExamplePost from "~/assets/img/example_post.jpg";
 import DefaultAvatar from "~/assets/img/user.jpg";
 import {OtherOptionsIcon} from "~/assets/icons.tsx";
+import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
+import classNames from "classnames";
 
 type props = {
     isOpen: boolean,
@@ -10,6 +12,7 @@ type props = {
 }
 
 export default function PostDialog(props: props) {
+    const { width, height } = UseWindowDimensions();
     const { isOpen, setIsOpen } = props;
     const navigate = useNavigate();
 
@@ -26,12 +29,15 @@ export default function PostDialog(props: props) {
         >
             <div className="fixed inset-0 flex items-center justify-center bg-[#000000a6]">
                 <Dialog.Panel> {/* overflow-y-auto max-h-[calc(100%-40px)]  */}
-                    <div className="flex max-h-[897px]">
-                        <div className="max-w-[897px] min-h-[450px] h-full w-full">
-                            <img src={ExamplePost} alt="" className="object-cover h-full" />
+                    <div className="flex">
+                        <div className="bg-black">
+                            <img src={ExamplePost} alt="" className="object-cover" style={{ height: (height ? height - 48 : 0) }} />
                         </div>
-                        <div className="bg-black flex flex-col">
-                            <PostHeader />
+                        <div className={classNames("bg-red-400 flex flex-col", {
+                            "!w-[500px]": width && width >= 1380,
+                            "!w-[405px]": width && width <= 1285
+                        })} style={{ width: (width && (width > 1285) && (width < 1380)) ? width- 880 : 0 }}>
+
                         </div>
                     </div>
                 </Dialog.Panel>
@@ -59,3 +65,14 @@ const PostHeader = () => {
         </div>
     )
 }
+
+/*
+<div className="flex max-h-[897px]">
+    <div className="max-w-[897px] min-h-[450px] h-full w-full">
+        <img src={ExamplePost} alt="" className="object-cover h-full" />
+    </div>
+    <div className="bg-black flex flex-col">
+        <PostHeader />
+    </div>
+</div>
+*/
