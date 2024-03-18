@@ -5,6 +5,7 @@ import ExamplePost from "~/assets/img/example_post.jpg";
 import ShowedAllPostsImage from "~/assets/img/showed_all_posts.png";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 import classNames from "classnames";
+import {MouseEvent} from "react";
 
 export default function Posts() {
     return (
@@ -101,8 +102,8 @@ function PostFooter() {
                 <div className="flex items-center">
                     <button className="w-8 h-10 p-2 pl-0 group">
                         <HeartIcon
-                            onMouseLeave={(e: any) => e.target.classList.add('animate-HeartButtonAnimation')}
-                            onMouseOver={(e: any) => e.target.classList.remove('animate-HeartButtonAnimation')}
+                            onMouseLeave={(e: MouseEvent<SVGElement>) => e.target.classList.add('animate-HeartButtonAnimation')}
+                            onMouseOver={(e: MouseEvent<SVGElement>) => e.target.classList.remove('animate-HeartButtonAnimation')}
                             className="text-[#f5f5f5] group-hover:text-[#8e8e8e]"
                             width={24}
                             height={24}

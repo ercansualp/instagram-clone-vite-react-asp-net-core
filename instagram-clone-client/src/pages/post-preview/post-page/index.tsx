@@ -9,7 +9,7 @@ export default function PostPage() {
     const currentUrl = location.pathname;
 
     return (
-        <div className="mb-[50px] flex flex-col h-[calc(100vh-50px)]">
+        <div className="mb-[50px] flex flex-col">
             <Header title={!currentUrl.includes("comments") ? "Gönderi" : "Yorumlar"} />
             {
                 !currentUrl.includes("comments") ? <Post /> : <PostComments />
@@ -23,7 +23,7 @@ const Header = (props: { title: string }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="border-b border-b-[#363636] !h-[45px] px-4 flex items-center">
+        <div className="border-b border-b-[#363636] !min-h-[45px] !h-[45px] px-4 flex items-center sticky top-0 left-0 bg-black">
             <button className="w-8 h-6" onClick={() => navigate(-1)}>
                 <BackArrowIcon width={24} height={24} className="-rotate-90" />
             </button>
@@ -76,8 +76,8 @@ const PostActions = () => {
                     </div>
 
                     <div className="w-10 h-10 p-2 pl-0">
-                        <button>
-                            <CommentIcon width={24} height={24} />
+                        <button onClick={() => navigate("comments")}>
+                            <CommentIcon width={24} height={24}/>
                         </button>
                     </div>
                 </div>
@@ -95,14 +95,30 @@ const PostActions = () => {
 }
 
 const PostComments = () => {
+    type comment = {
+        id: number,
+        commentText: string,
+        commentDate: string,
+        commentAuthor: string
+    }
+
+    const comments: comment[] = [
+        { id: 1, commentText: "fdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaa", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 1, commentText: "fdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaa", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 1, commentText: "fdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaa", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 1, commentText: "fdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaafdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdffdhjgkdfdgfdfaa", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 5, commentText: "fdhjgkdf", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 6, commentText: "fdhjgkdf", commentDate: "57d", commentAuthor: "_ahmeter_234" },
+        { id: 7, commentText: "fdhjgkdf", commentDate: "57d", commentAuthor: "_ahmeter_234" }
+    ];
+
     return (
-        <div className="mt-3 flex flex-col grow overflow-x-hidden overflow-y-auto">
-            <Comment commentText="ömvcnbmövcb" commentDate="57d" commentAuthor="_ahmeter_234" />
-            <Comment commentText="fdhjgkdf" commentDate="57d" commentAuthor="_ahmeter_234" />
-            <Comment commentText="fdhjgkdf" commentDate="57d" commentAuthor="_ahmeter_234" />
-            <Comment commentText="fdhjgkdf" commentDate="57d" commentAuthor="_ahmeter_234" />
-            <Comment commentText="fdhjgkdf" commentDate="57d" commentAuthor="_ahmeter_234" />
-            <Comment commentText="fdhjgkdf" commentDate="57d" commentAuthor="_ahmeter_234" />
+        <div className="mt-3 flex flex-col grow max-w-full overflow-y-auto overflow-x-hidden">
+            {
+                comments.map(comment => (
+                    <Comment key={comment.id} commentText={comment.commentText} commentDate={comment.commentDate} commentAuthor={comment.commentAuthor} />
+                ))
+            }
         </div>
     )
 }
@@ -111,24 +127,58 @@ const Comment = (props: { commentText: string, commentDate: string, commentAutho
     const { commentText, commentDate, commentAuthor } = props;
 
     return (
-        <div className="pl-2 py-3 flex h-[62px]">
-            <Link to="ercansualp" className="mr-2 h-[38px] w-8">
-                <img src={DefaultAvatar} alt="" className="rounded-full w-8 h-8" />
-            </Link>
-            <div className="flex flex-col gap-y-1 grow">
-                <div className="flex text-[#f5f5f5] text-sm leading-[18px]">
-                    <Link to="ercansualp" className="font-semibold">{commentAuthor}</Link>
+        <div className="pl-2 py-3 flex min-h-[62px]">
+            <CommentAuthorAvatar />
+            <div className="flex flex-col gap-y-1 w-[calc(100%-84px)]">
+                <div className="text-[#f5f5f5] text-sm leading-[18px]">
+                    <CommentAuthor commentAuthor={commentAuthor} />
                     &nbsp;
-                    <div className="font-normal">{commentText}</div>
+                    <CommentText commentText={commentText} />
                 </div>
                 <div className="flex gap-x-3 text-[#a8a8a8] leading-4 text-xs mt-px">
-                    <span className="font-normal">{commentDate}</span>
-                    <button className="font-semibold">Yanıtla</button>
+                    <CommentDate commentDate={commentDate} />
+                    <AnswerComment />
                 </div>
             </div>
-            <div className="px-4 pb-2 text-[#8e8e8e] mt-[9px]">
-                <HeartIcon width={12} height={12} />
-            </div>
+            <LikeComment />
         </div>
     )
+}
+
+const CommentAuthor = (props: { commentAuthor: string }) => {
+    const { commentAuthor } = props;
+
+    return <Link to="ercansualp" className="font-semibold">{commentAuthor}</Link>
+}
+
+const CommentText = (props: { commentText: string }) => {
+    const { commentText } = props;
+
+    return <div className="font-normal max-w-[calc(100%)]" style={{ wordWrap: "break-word" }}>{commentText}</div>
+}
+
+const CommentDate = (props: { commentDate: string }) => {
+    const { commentDate } = props;
+
+    return <span className="font-normal">{commentDate}</span>
+}
+
+const CommentAuthorAvatar = () => {
+    return (
+        <Link to="ercansualp" className="mr-2 !h-[38px] !w-8">
+            <img src={DefaultAvatar} alt="" className="rounded-full w-8 h-8"/>
+        </Link>
+    )
+}
+
+const LikeComment = () => {
+    return (
+        <div className="px-4 pb-2 text-[#8e8e8e] mt-[9px] ml-auto">
+            <HeartIcon width={12} height={12} />
+        </div>
+    )
+}
+
+const AnswerComment = () => {
+    return <button className="font-semibold">Yanıtla</button>
 }
