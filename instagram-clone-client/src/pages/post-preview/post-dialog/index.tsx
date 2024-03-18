@@ -30,13 +30,17 @@ export default function PostDialog(props: props) {
             <div className="fixed inset-0 flex items-center justify-center bg-[#000000a6]">
                 <Dialog.Panel> {/* overflow-y-auto max-h-[calc(100%-40px)]  */}
                     <div className="flex">
-                        <div className="bg-black">
-                            <img src={ExamplePost} alt="" className="object-cover" style={{ height: (height ? height - 48 : 0) }} />
+                        <div className="grow aspect-square bg-black min-h-[450px] flex justify-center flex-col overflow-hidden shrink pointer-events-auto relative" style={{ maxWidth: (height ? height - 48 : 0), maxHeight: (height ? height - 48 : 0), flexBasis: (height ? height - 48 : 0) }}>
+                            <div className="flex flex-col relative items-stretch">
+                                <div className="pb-[100%] overflow-hidden relative ">
+                                    <img src={ExamplePost} alt="" className="object-cover w-full h-full absolute top-0 left-0" />
+                                </div>
+                            </div>
                         </div>
-                        <div className={classNames("bg-red-400 flex flex-col", {
+                        <div className={classNames("bg-red-400 flex flex-col !min-w-[405px]", {
                             "!w-[500px]": width && width >= 1380,
                             "!w-[405px]": width && width <= 1285
-                        })} style={{ width: (width && (width > 1285) && (width < 1380)) ? width- 880 : 0 }}>
+                        })} style={{ width: (width && (width > 1285) && (width < 1380)) ? width- 807 : 0 }}>
 
                         </div>
                     </div>

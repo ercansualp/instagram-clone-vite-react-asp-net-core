@@ -3,6 +3,7 @@ import ExamplePost from "~/assets/img/example_post.jpg";
 import ExamplePost2 from "~/assets/img/example_post_2.jpg";
 import {MouseEvent, ReactNode, useState} from "react";
 import PostPreview from "~/pages/post-preview";
+import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 
 export default function Posts() {
     const posts: { postId: string, src: string|ReactNode }[] = [
@@ -24,13 +25,17 @@ export default function Posts() {
 }
 
 const Post = (props: { post: { src: string|ReactNode, postId: string } }) => {
+    const { width } = UseWindowDimensions();
     const { post } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
-        window.history.replaceState(null, "", `/p/${post.postId}`);
-        setIsOpen(true);
+        if(width && width >= 737)
+        {
+            event.preventDefault();
+            window.history.replaceState(null, "", `/p/${post.postId}`);
+            setIsOpen(true);
+        }
     }
 
     return (
