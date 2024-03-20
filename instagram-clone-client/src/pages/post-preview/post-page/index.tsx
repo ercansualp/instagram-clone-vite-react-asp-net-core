@@ -1,4 +1,4 @@
-import {BackArrowIcon, CommentIcon, HeartIcon, OtherOptionsIcon, SavedPostsIcon} from "~/assets/icons.tsx";
+import {BackArrowIcon, CancelIcon, CommentIcon, HeartIcon, OtherOptionsIcon, SavedPostsIcon} from "~/assets/icons.tsx";
 import {Link} from "react-router-dom";
 import DefaultAvatar from "~/assets/img/user.jpg";
 import ExamplePost from "~/assets/img/example_post.jpg";
@@ -11,7 +11,8 @@ type comment = {
     commentDate: string,
     commentAuthor: string,
     commentReplies?: commentReply[],
-    showReplies?: boolean
+    showReplies?: boolean,
+    likes: {id: number, likeAuthor: string}[]
 }
 
 type commentReply = {
@@ -28,10 +29,59 @@ export default function PostPage() {
 
     return (
         <div className="mb-[50px] flex flex-col">
-            <Header title={!currentUrl.includes("comments") ? "Gönderi" : "Yorumlar"} />
+            <Header
+                title={
+                    currentUrl.includes("comments") ? "Yorumlar" :
+                    currentUrl.includes("liked_by") ? "Beğenmeler" :
+                                                      "Gönderi"
+                }
+            />
             {
-                !currentUrl.includes("comments") ? <Post /> : <PostComments />
+                currentUrl.includes("comments") ? <PostComments /> :
+                currentUrl.includes("liked_by") ? <CommentLikes /> :
+                                                  <Post />
             }
+        </div>
+    )
+}
+
+const CommentLikes = () => {
+    const users: { id: number, username: string, avatar: string, follow: boolean }[] = [
+        {
+            id: 1,
+            username: "_ahmeter_234",
+            avatar: (DefaultAvatar as unknown) as string,
+            follow: true
+        },
+        {
+            id: 2,
+            username: "ahmeter.233",
+            avatar: (DefaultAvatar as unknown) as string,
+            follow: false
+        }
+    ]
+
+    return (
+        <div className="bg-black overflow-x-hidden overflow-y-auto">
+            {
+                users.map((user) => <CommentLike key={user.id} user={user} />)
+            }
+        </div>
+    )
+}
+
+const CommentLike = (props: { user: { id: number, username: string, avatar: string, follow: boolean } }) => {
+    const { user } = props;
+
+    return (
+        <div className="py-2 px-4 flex items-center gap-x-3 text-[#f5f5f5] text-sm font-semibold leading-[18px]">
+            <Link to="ercansualp">
+                <img src={user.avatar} alt="" className="w-11 h-11 rounded-full" />
+            </Link>
+            <div className="grow">
+                <Link to="ercansualp">{user.username}</Link>
+            </div>
+            { user.follow ? <button className="px-5 py-[7px] bg-[#363636] rounded-lg">Takiptesin</button> : null }
         </div>
     )
 }
@@ -43,7 +93,7 @@ const Header = (props: { title: string }) => {
     return (
         <div className="border-b border-b-[#363636] !min-h-[45px] !h-[45px] px-4 flex items-center sticky top-0 left-0 bg-black z-50">
             <button className="w-8 h-6" onClick={() => navigate(-1)}>
-                <BackArrowIcon width={24} height={24} className="-rotate-90" />
+                { title !== "Beğenmeler" ? <BackArrowIcon width={24} height={24} className="-rotate-90" /> : <CancelIcon width={24} height={24} /> }
             </button>
             <h1 className="text-[#f5f5f5] text-base font-semibold leading-[18px] grow justify-center flex mr-8">{title}</h1>
         </div>
@@ -124,70 +174,102 @@ const PostComments = () => {
                 { id: 2, commentText: "ömvcnbmövcb", commentDate: "57d", commentAuthor: "_ahmeter_234", personRespondedTo: "_ahmeter_234" },
                 { id: 3, commentText: "ömvcnbmövcb", commentDate: "57d", commentAuthor: "_ahmeter_234", personRespondedTo: "_ahmeter_234" }
             ],
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" },
+                { id: 2, likeAuthor: "_ahmeter_234" },
+                { id: 3, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 2,
             commentText: "Dhsjsjdhdgdhsjwjwiuehdsjsjdhhdhdjsjdhddhsjsjakkssj",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 3,
             commentText: "Dhdhdhsjsjdh",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 4,
             commentText: "fdhjgkdf",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 5,
             commentText: "Sjsbsbsvsbbssvhssbvxvxvxhsjsmansnshfjddhdjdbbddhdjdhdhdhhsjsjsnxxb",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 6,
             commentText: "Sjdbshdjdjbxdhdjksksksksosisxhxbxbxnxnsmsmmsksksksjsjssbvsvdvsshjwkwwkkurhhfgfbdbbxcbxnjddkdjdhhfdhbdsjskksoeirhrhrbfndm",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 7,
             commentText: "Eiciebcebbgtkgkgkxkgkxtoxgkfdjdhdhhddhjdhjdsjdjdhdjdhdvdbbddhdjjdjcjdkeoeoriryrueopwwpueyrdhdjdhdhdhhdhdwjwkeooruryryryf",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 7,
             commentText: "Eiciebcebbgtkgkgkxkgkxtoxgkfdjdhdhhddhjdhjdsjdjdhdjdhdvdbbddhdjjdjcjdkeoeoriryrueopwwpueyrdhdjdhdhdhhdhdwjwkeooruryryryf",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 7,
             commentText: "Eiciebcebbgtkgkgkxkgkxtoxgkfdjdhdhhddhjdhjdsjdjdhdjdhdvdbbddhdjjdjcjdkeoeoriryrueopwwpueyrdhdjdhdhdhhdhdwjwkeooruryryryf",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
         {
             id: 7,
             commentText: "Eiciebcebbgtkgkgkxkgkxtoxgkfdjdhdhhddhjdhjdsjdjdhdjdhdvdbbddhdjjdjcjdkeoeoriryrueopwwpueyrdhdjdhdhdhhdhdwjwkeooruryryryf",
             commentDate: "57d",
             commentAuthor: "_ahmeter_234",
-            showReplies: false
+            showReplies: false,
+            likes: [
+                { id: 1, likeAuthor: "_ahmeter_234" }
+            ]
         },
     ]);
 
@@ -225,6 +307,7 @@ const Comment = (props: { comment: comment, comments: comment[], setComments: (v
                 </div>
                 <div className="flex gap-x-3 text-[#a8a8a8] leading-4 text-xs mt-px">
                     <CommentDate commentDate={comment.commentDate} />
+                    { comment.likes.length !== 0 ? <Link to="/p/C4lMB1biHwFalOUgRiGzHolwkNJJctKDAoccxw1/c/18027037678840749/liked_by" className="font-semibold">{comment.likes.length} beğenme</Link> : null }
                     <AnswerComment />
                 </div>
                 {
@@ -324,7 +407,7 @@ const AddComment = (props: { comments: comment[], setComments: (value: comment[]
         {
             const newComments: comment[] = [...comments];
             newComments.unshift(
-                { id: (comments.length + 1), commentText: comment, commentDate: "57d", commentAuthor: "_ahmeter_234" }
+                { id: (comments.length + 1), commentText: comment, commentDate: "57d", commentAuthor: "_ahmeter_234", likes: [] }
             );
             setComments(newComments);
             setComment(null);

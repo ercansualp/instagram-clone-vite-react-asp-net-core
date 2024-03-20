@@ -26,6 +26,10 @@ const rotues = createBrowserRouter([
         element: <Main><PostPreview /></Main>
     },
     {
+        path: "p/:postId/c/:commentId/liked_by", // p/C4lMB1biHwFalOUgRiGzHolwkNJJctKDAoccxw0/
+        element: <Main><PostPreview /></Main>
+    },
+    {
         path: "/",
         element: <Protected />,
         children: [
