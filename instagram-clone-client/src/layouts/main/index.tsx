@@ -5,12 +5,15 @@ import {setContentMargin, setSidebarWidth} from "~/store/dimensions/actions.tsx"
 import Footer from "~/layouts/main/footer";
 import classNames from "classnames";
 import {useSidebarSection} from "~/store/sidebar/hooks.tsx";
+import {useLocation} from "react-router-dom";
 
 type props = {
     children: ReactNode
 }
 
 export default function Main(props: props) {
+    const location = useLocation();
+    const currentUrl = location.pathname;
     const { children } = props;
     const { width } = UseWindowDimensions();
     const sidebarSection = useSidebarSection();
@@ -18,7 +21,14 @@ export default function Main(props: props) {
     useEffect(() => {
         if(width && !sidebarSection)
         {
-            if(width >= 1920)
+            if((width >= 768 && width < 1264) || currentUrl.includes("direct"))
+            {
+                setSidebarWidth(73);
+                document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
+                document.documentElement.style.setProperty("--content-margin", 73 + "px");
+                setContentMargin(73);
+            }
+            else if(width >= 1920)
             {
                 setSidebarWidth(336);
                 document.documentElement.style.setProperty("--sidebar-width", 336 + "px");
@@ -31,13 +41,6 @@ export default function Main(props: props) {
                 document.documentElement.style.setProperty("--sidebar-width", 245 + "px");
                 document.documentElement.style.setProperty("--content-margin", 245 + "px");
                 setContentMargin(245);
-            }
-            else if(width >= 768 && width < 1264)
-            {
-                setSidebarWidth(73);
-                document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
-                document.documentElement.style.setProperty("--content-margin", 73 + "px");
-                setContentMargin(73);
             }
             else
             {
@@ -75,7 +78,6 @@ export default function Main(props: props) {
     useEffect(() => {
         if(sidebarSection)
         {
-            console.log("b")
             setSidebarWidth(73);
             document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
         }

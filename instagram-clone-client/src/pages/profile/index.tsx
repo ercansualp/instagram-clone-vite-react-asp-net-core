@@ -11,7 +11,7 @@ import {
     SettingsIcon
 } from "~/assets/icons.tsx";
 import Followers from "~/pages/profile/followers";
-import {ReactNode, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 import classNames from "classnames";
 import Posts from "~/pages/profile/posts";
@@ -19,20 +19,38 @@ import SavedPosts from "~/pages/profile/saved-posts";
 import TaggedPosts from "~/pages/profile/tagged-posts";
 import UseWindowDimensions from "~/utils/UseWindowDimensions.tsx";
 import Feed from "~/pages/profile/feed";
+import Loading from "~/routes/Loading.tsx";
+import FindUserByUsername from "~/services/users-service.ts";
+import NoUser from "~/pages/profile/no-user";
 
 export default function Profile() {
     const { width } = UseWindowDimensions();
     const [value, setValue] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState(false);
     const { username, profileParam } = useParams();
+    const [loading, setLoading] = useState<boolean>(true);
+    const [user, setUser] = useState();
 
     const handleClick = (value: boolean) => {
         setValue(value);
         setIsOpen(true);
     }
 
-    return (
-        <>
+    useEffect(() => {
+        if(username !== undefined)
+            FindUserByUsername(username).then(user => {
+                setUser(user);
+                setLoading(false);
+            });
+    }, []);
+
+    if(loading)
+        return <Loading />
+    else if(user && !user.isUserHave)
+        return <NoUser />
+    else
+        return (
+            <>
             <div className="flex flex-col">
                 <div className={classNames("mx-auto max-w-[935px] mb-[30px] w-full flex flex-col", {
                     "px-5 pt-[30px]": width && width >= 768
@@ -151,15 +169,15 @@ export default function Profile() {
                     <PostOptions />
                     {
                         !profileParam ?             <Posts /> :
-                        profileParam === "saved" ?  <SavedPosts /> :
-                        profileParam === "tagged" ? <TaggedPosts /> :
-                                                    <Feed />
+                            profileParam === "saved" ?  <SavedPosts /> :
+                                profileParam === "tagged" ? <TaggedPosts /> :
+                                    <Feed />
                     }
                 </div>
             </div>
             <Followers value={value} isOpen={isOpen} setIsOpen={setIsOpen} />
         </>
-    )
+        )
 }
 
 const Button = (props: { children: string }) => {

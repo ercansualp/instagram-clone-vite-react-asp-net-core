@@ -4,16 +4,26 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
     <RootNamespace>instagram_clone_api.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\instagram-clone-api.Application\instagram-clone-api.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\instagram-clone-api.Infrastructure\instagram-clone-api.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\instagram-clone-api.Persistence\instagram-clone-api.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,12 @@
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\bin\Debug\net8.0\instagram-clone-api.Domain.deps.json
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\bin\Debug\net8.0\instagram-clone-api.Domain.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\bin\Debug\net8.0\instagram-clone-api.Domain.pdb
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.AssemblyInfoInputs.cache
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.AssemblyInfo.cs
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.sourcelink.json
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\refint\instagram-clone-api.Domain.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\instagram-clone-api.Domain.pdb
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Domain\obj\Debug\net8.0\ref\instagram-clone-api.Domain.dll

@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\instagram-clone-api.Domain\instagram-clone-api.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

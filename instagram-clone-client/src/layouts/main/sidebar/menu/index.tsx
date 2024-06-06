@@ -107,18 +107,24 @@ export default function Menu() {
 
         if(item.value)
         {
-            setSidebarSection(true);
             setSidebarWidth(73);
             document.documentElement.style.setProperty("--sidebar-width", 73 + "px");
             if(item.url === "direct/inbox")
             {
                 document.documentElement.style.setProperty("--content-margin", 73 + "px");
                 setContentMargin(73);
+                setSidebarSection(false);
             }
             if(item.title === "Ara")
+            {
                 setValue(true);
+                setSidebarSection(!sidebarSection);
+            }
             if(item.title === "Bildirimler")
+            {
                 setValue(false);
+                setSidebarSection(!sidebarSection);
+            }
         }
         else {
             setSidebarSection(false);

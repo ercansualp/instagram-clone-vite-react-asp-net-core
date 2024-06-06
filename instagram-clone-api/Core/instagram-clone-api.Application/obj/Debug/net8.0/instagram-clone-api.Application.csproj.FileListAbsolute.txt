@@ -1,0 +1,16 @@
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\bin\Debug\net8.0\instagram-clone-api.Application.deps.json
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\bin\Debug\net8.0\instagram-clone-api.Application.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\bin\Debug\net8.0\instagram-clone-api.Application.pdb
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\bin\Debug\net8.0\instagram-clone-api.Domain.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\bin\Debug\net8.0\instagram-clone-api.Domain.pdb
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.csproj.AssemblyReference.cache
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.AssemblyInfoInputs.cache
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.AssemblyInfo.cs
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.csproj.CoreCompileInputs.cache
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.sourcelink.json
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.csproj.CopyComplete
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\refint\instagram-clone-api.Application.dll
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\instagram-clone-api.Application.pdb
+C:\Users\ercan\OneDrive\Masaüstü\Masaüstü\27022024\instagram-clone\instagram-clone-api\Core\instagram-clone-api.Application\obj\Debug\net8.0\ref\instagram-clone-api.Application.dll

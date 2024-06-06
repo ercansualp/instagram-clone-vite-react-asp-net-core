@@ -7,7 +7,6 @@ export default function Home() {
     const { width } = UseWindowDimensions();
     // const [content, setContent] = useState(true);
     const content = true;
-
     if(content)
         return (
             <div className="flex justify-center pt-[22px] min-h-full">

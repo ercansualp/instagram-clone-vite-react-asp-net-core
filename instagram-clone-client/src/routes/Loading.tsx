@@ -3,7 +3,7 @@ import FromMeta from "~/assets/img/from_meta.png";
 
 export default function Loading() {
     return (
-        <div className="h-screen flex items-center justify-center">
+        <div className="h-screen flex items-center justify-center absolute top-0 left-0 w-full z-50 bg-black">
             <img src={LoadingIcon} alt="" width={80} height={80} />
             <span className="w-[72px] h-[41px] -mt-9 -ml-9 absolute bottom-8 inset-x-1/2">
                 <img src={FromMeta} alt="" width={72} height={37} />

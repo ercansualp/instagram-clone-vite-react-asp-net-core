@@ -15,6 +15,8 @@ import {useState} from "react";
 import MoreOptionsItem from "~/layouts/main/sidebar/menu/menu-footer/more-options/more-options-item";
 import SwitchAppearance from "~/layouts/main/sidebar/menu/menu-footer/more-options/switch-appearance";
 import ReportAProblemDialog from "~/layouts/main/sidebar/menu/menu-footer/more-options/report-a-problem-dialog";
+import {setCurrentUser} from "~/store/authentication/actions.tsx";
+import axios from "axios";
 
 export default function Threads() {
     const sidebarWidth = useSidebarWidth();
@@ -62,6 +64,11 @@ export default function Threads() {
         },
         {
             title: "Çıkış yap",
+            onClick: () => {
+                localStorage.removeItem("accessToken");
+                delete axios.defaults.headers.common["Authorization"];
+                setCurrentUser(undefined);
+            }
         }
     ]
     const [enabled, setEnabled] = useState(false)

@@ -1,7 +1,10 @@
+import MessagesSidebar from "~/pages/messages/messages-sidebar";
+
 export default function Messages() {
     return (
-        <>
-            Messages Page
-        </>
+        <div className="flex relative">
+            <MessagesSidebar />
+            <div className="grow"></div>
+        </div>
     )
 }

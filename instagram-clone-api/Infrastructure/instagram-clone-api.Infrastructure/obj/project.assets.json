@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "instagram-clone-api.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "instagram-clone-api.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/instagram-clone-api.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/instagram-clone-api.Application.dll": {}
+        }
+      },
+      "instagram-clone-api.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/instagram-clone-api.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/instagram-clone-api.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "instagram-clone-api.Application/1.0.0": {
+      "type": "project",
+      "path": "../../Core/instagram-clone-api.Application/instagram-clone-api.Application.csproj",
+      "msbuildProject": "../../Core/instagram-clone-api.Application/instagram-clone-api.Application.csproj"
+    },
+    "instagram-clone-api.Domain/1.0.0": {
+      "type": "project",
+      "path": "../../Core/instagram-clone-api.Domain/instagram-clone-api.Domain.csproj",
+      "msbuildProject": "../../Core/instagram-clone-api.Domain/instagram-clone-api.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "instagram-clone-api.Application >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\ercan\\.nuget\\packages\\": {},
@@ -14,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\instagram-clone-api.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\instagram-clone-api.Infrastructure.csproj",
       "projectName": "instagram-clone-api.Infrastructure",
-      "projectPath": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\instagram-clone-api.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\instagram-clone-api.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\ercan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Infrastructure\\instagram-clone-api.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -39,7 +76,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ercan\\OneDrive\\Masaüstü\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Core\\instagram-clone-api.Application\\instagram-clone-api.Application.csproj": {
+              "projectPath": "C:\\Users\\ercan\\OneDrive\\Masaüstü\\Masaüstü\\27022024\\instagram-clone\\instagram-clone-api\\Core\\instagram-clone-api.Application\\instagram-clone-api.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
